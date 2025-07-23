@@ -36,6 +36,7 @@ public class Cachorro extends Animal {
         this.tipo = tipo;
     }
 
+    @Override
     public String getNome() {
         return nome;
     }

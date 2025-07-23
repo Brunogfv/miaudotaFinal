@@ -1,4 +1,4 @@
-public class Animal {
+public abstract class Animal {
     protected int idAnimal;
     protected int fkUsuario;
 
@@ -6,6 +6,8 @@ public class Animal {
         this.idAnimal = idAnimal;
         this.fkUsuario = fkUsuario;
     }
+
+    public abstract String getNome();
 
     public int getIdAnimal() {
         return idAnimal;
