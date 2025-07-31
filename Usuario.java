@@ -8,6 +8,7 @@ public class Usuario extends Pessoa {
     private String telefone;
     private Endereco endereco;
     private Date dataCadastro;
+    private TipoUsuario tipoUsuario;
 
     public Usuario(int idUsuario, String nome, String cpf, String email, String telefone, Endereco endereco, Date dataCadastro, int idPessoa, int fkUsuario, boolean statusConta) {
         super(idPessoa, fkUsuario, statusConta); // Chama o construtor da superclasse Pessoa    
@@ -20,12 +21,13 @@ public class Usuario extends Pessoa {
         this.dataCadastro = dataCadastro;
     }
 
-    public Usuario(String nome, String cpf, Endereco endereco, Date dataCadastro) {
+    public Usuario(String nome, String cpf, Endereco endereco, Date dataCadastro, TipoUsuario tipoUsuario) {
         super(0, 0, true); // Chama o construtor da superclasse Pessoa com valores padrão
         this.nome = nome;
         this.cpf = cpf;
         this.endereco = endereco;
         this.dataCadastro = dataCadastro;
+        this.tipoUsuario = tipoUsuario;
     }
 
     @Override
@@ -122,6 +124,14 @@ public class Usuario extends Pessoa {
 
     public void setDataCadastro(Date dataCadastro) {
         this.dataCadastro = dataCadastro;
+    }
+
+    public TipoUsuario getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(TipoUsuario tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
     }
 
     @Override

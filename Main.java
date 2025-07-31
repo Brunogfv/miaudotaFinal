@@ -8,6 +8,12 @@ public class Main {
     static List<Usuario> usuarios = new ArrayList<>();
     static List<Animal> animaisDisponiveis = new ArrayList<>();
     static List<ProcessoAdocao> processos = new ArrayList<>();
+    static List<Usuario> tutores = usuarios.stream()
+            .filter(u -> u.getTipoUsuario() == TipoUsuario.TUTOR)
+            .toList();
+    static List<Usuario> adotantes = usuarios.stream()
+            .filter(u -> u.getTipoUsuario() == TipoUsuario.ADOTANTE)
+            .toList();
 
     static Scanner sc = new Scanner(System.in);
     
@@ -70,8 +76,14 @@ public class Main {
         System.out.print("Estado: ");
         String estado = sc.nextLine();
 
+        System.out.println("Tipo de Usuario: ");
+        System.out.println("1. Tutor");
+        System.out.println("2. Adotante");
+        int tipoOpcao = Integer.parseInt(sc.nextLine());
+        TipoUsuario tipo = (tipoOpcao == 1) ? TipoUsuario.TUTOR : TipoUsuario.ADOTANTE;
+
         Endereco endereco = new Endereco(rua, numero, bairro, cidade, cep, estado);
-        Usuario usuario = new Usuario(nome, cpf, endereco, new Date());
+        Usuario usuario = new Usuario(nome, cpf, endereco, new Date(), tipo);
         usuarios.add(usuario);
 
         System.out.println("Tutor cadastrado com sucesso!");
@@ -122,12 +134,12 @@ public class Main {
             SaudeAnimalCachorro saude = new SaudeAnimalCachorro(vacinado, castrado);
             HistoricoSaudeCachorro hist = new HistoricoSaudeCachorro(doencas);
             DescricaoCachorro desc = new DescricaoCachorro(descricao, hist);
-            animal = new Cachorro(nome, idade, raca, porte, sexo, cor, peso, saude, desc, TipoAnimal.CACHORRO);
+            animal = new Cachorro(nome, idade, raca, porte, sexo, cor, peso, saude, desc, TipoAnimal.CACHORRO, StatusAdocao.DISPONIVEL);
         } else {
             SaudeAnimalGato saude = new SaudeAnimalGato(vacinado, castrado);            
             HistoricoSaudeGato hist = new HistoricoSaudeGato(doencas);
             DescricaoGato desc = new DescricaoGato(descricao, hist);
-            animal = new Gato(nome, idade, raca, porte, sexo, cor, peso, saude, desc, TipoAnimal.GATO);
+            animal = new Gato(nome, idade, raca, porte, sexo, cor, peso, saude, desc, TipoAnimal.GATO, StatusAdocao.DISPONIVEL);
         }
 
         animaisDisponiveis.add(animal);
