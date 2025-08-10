@@ -5,14 +5,15 @@ public class ProcessoAdocao {
     private int fkUsuario;
     private int fkAnimal;
     private Animal animal;
-    private Usuario usuario;
+    private Usuario tutor;
+    private Usuario adotante;
     private StatusProcesso status;
     private Date dataSolicitacao;
     private Date dataAprovacao;
     private Date dataConclusao;
     private Avaliacao avaliacao;
 
-    public ProcessoAdocao(int idProcAdocao, int fkUsuario, int fkAnimal, Animal animal, Usuario usuario, StatusProcesso status, Date dataSolicitacao, Date dataAprovacao, Date dataConclusao, Avaliacao avaliacao) {
+    public ProcessoAdocao(int idProcAdocao, int fkUsuario, int fkAnimal, Animal animal, Usuario tutor, Usuario adotante, StatusProcesso status, Date dataSolicitacao, Date dataAprovacao, Date dataConclusao, Avaliacao avaliacao) {
         this.idProcAdocao = idProcAdocao;
         this.fkUsuario = fkUsuario;
         this.fkAnimal = fkAnimal;
@@ -22,13 +23,14 @@ public class ProcessoAdocao {
         this.avaliacao = avaliacao;
     }
 
-    public ProcessoAdocao(Usuario usuario, Animal animal, Date dataSolicitacao, StatusProcesso status) {
+    public ProcessoAdocao(Usuario tutor, Usuario adotante, Animal animal, Date dataSolicitacao, StatusProcesso status) {
+        this.tutor = tutor;
+        this.adotante = adotante;
         this.animal = animal;
-        this.usuario = usuario;
         this.status = status;
         this.dataSolicitacao = dataSolicitacao;
     }
-
+    
     public int getIdProcAdocao() {
         return idProcAdocao;
     }
@@ -60,13 +62,21 @@ public class ProcessoAdocao {
     public void setAnimal(Animal animal) {
         this.animal = animal;
     }
-
-    public Usuario getUsuario() {
-        return usuario;
+    
+    public Usuario getTutor() {
+        return tutor;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setTutor(Usuario tutor) {
+        this.tutor = tutor;
+    }
+
+    public Usuario getAdotante() {
+        return adotante;
+    }
+
+    public void setAdotante(Usuario adotante) {
+        this.adotante = adotante;
     }
 
     public StatusProcesso getStatus() {
@@ -107,5 +117,14 @@ public class ProcessoAdocao {
 
     public void setAvaliacao(Avaliacao avaliacao) {
         this.avaliacao = avaliacao;
+    }
+
+    public void exibirDetalhes() {
+        System.out.println("=== Processo de Adoção ===");
+        System.out.println("Tutor (que doou): " + tutor.getNome());
+        System.out.println("Adotante (quem adotou): " + adotante.getNome());
+        System.out.println("Animal: " + ((animal instanceof Cachorro) ? ((Cachorro) animal).getNome() : ((Gato) animal).getNome()) + " (" + ((animal instanceof Cachorro) ? ((Cachorro) animal).getTipo() : ((Gato) animal).getTipo()) + ")");
+        System.out.println("Data da Solicitação: " + dataSolicitacao);
+        System.out.println("Status: " + status);
     }
 }

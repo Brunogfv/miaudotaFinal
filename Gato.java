@@ -1,4 +1,4 @@
-public class Gato extends Animal {
+public class Gato extends Animal implements Adotavel {
     private String nome;
     private int idade;
     private String raca;
@@ -9,22 +9,9 @@ public class Gato extends Animal {
     private SaudeAnimalGato saudeAnimal;
     private DescricaoGato descricaoGato;
     private TipoAnimal tipo;
-
-    public Gato(int idAnimal, int fkUsuario, String nome, int idade, String raca, String porte, String sexo, String cor, double peso, SaudeAnimalGato saudeAnimal, DescricaoGato descricaoGato) {
-        super(idAnimal, fkUsuario);
-        this.nome = nome;
-        this.idade = idade;
-        this.raca = raca;
-        this.porte = porte;
-        this.sexo = sexo;
-        this.cor = cor;
-        this.peso = peso;
-        this.saudeAnimal = saudeAnimal;
-        this.descricaoGato = descricaoGato;
-    }
-
-    public Gato(String nome, int idade, String raca, String porte, String sexo, String cor, double peso, SaudeAnimalGato saudeAnimal, DescricaoGato descricaoGato, TipoAnimal tipo) {
-        super(0, 0); // Chama o construtor da superclasse Animal com valores padrão
+   
+    public Gato(String nome, int idade, String raca, String porte, String sexo, String cor, double peso, SaudeAnimalGato saudeAnimal, DescricaoGato descricaoGato, TipoAnimal tipo, StatusAdocao statusAdocao) {
+        super(0, 0, statusAdocao );
         this.nome = nome;
         this.idade = idade;
         this.raca = raca;
@@ -35,8 +22,15 @@ public class Gato extends Animal {
         this.saudeAnimal = saudeAnimal;
         this.descricaoGato = descricaoGato;
         this.tipo = tipo;
+        this.statusAdocao = statusAdocao;
     }
 
+    @Override
+    public String getDescricao() {
+        return this.getDescricaoGato().getDescGato();
+    }
+
+    @Override
     public String getNome() {
         return nome;
     }
@@ -115,5 +109,13 @@ public class Gato extends Animal {
 
     public void setTipo(TipoAnimal tipo) {
         this.tipo = tipo;
+    }
+
+    public StatusAdocao getStatusAdocao() {
+        return statusAdocao;
+    }
+
+    public void setStatusAdocao(StatusAdocao statusAdocao) {
+        this.statusAdocao = statusAdocao;
     }
 }

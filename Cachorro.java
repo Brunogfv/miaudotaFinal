@@ -1,4 +1,4 @@
-public class Cachorro extends Animal {
+public class Cachorro extends Animal implements Adotavel {
     private String nome;
     private int idade;
     private String raca;
@@ -10,20 +10,8 @@ public class Cachorro extends Animal {
     private DescricaoCachorro descricaoCachorro;
     private TipoAnimal tipo;
 
-    // public Cachorro(int idAnimal, int fkUsuario, String nome, int idade, String raca, String porte, String sexo, String cor, double peso, SaudeAnimalCachorro saudeAnimal, DescricaoCachorro descricaoCachorro) {
-    //     super(idAnimal, fkUsuario);
-    //     this.nome = nome;
-    //     this.idade = idade;
-    //     this.raca = raca;
-    //     this.porte = porte;
-    //     this.cor = cor;
-    //     this.peso = peso;
-    //     this.saudeAnimal = saudeAnimal;
-    //     this.descricaoCachorro = descricaoCachorro;
-    // }
-
-    public Cachorro(String nome, int idade, String raca, String porte, String sexo, String cor, double peso, SaudeAnimalCachorro saudeAnimal, DescricaoCachorro descricaoCachorro, TipoAnimal tipo) {
-        super(0, 0); // Chama o construtor da superclasse Animal com valores padrão
+    public Cachorro(String nome, int idade, String raca, String porte, String sexo, String cor, double peso, SaudeAnimalCachorro saudeAnimal, DescricaoCachorro descricaoCachorro, TipoAnimal tipo, StatusAdocao statusAdocao) {
+        super(0, 0, statusAdocao); 
         this.nome = nome;
         this.idade = idade;
         this.raca = raca;
@@ -34,8 +22,19 @@ public class Cachorro extends Animal {
         this.saudeAnimal = saudeAnimal;
         this.descricaoCachorro = descricaoCachorro;
         this.tipo = tipo;
+        this.statusAdocao = statusAdocao;
     }
 
+    @Override
+    public String getDescricao() {
+        return this.getDescricaoCachorro().getDescCachorro();
+    }
+
+    @Override
+    public boolean isDisponivelParaAdocao() {
+        return this.getStatusAdocao() == StatusAdocao.DISPONIVEL;
+    }
+    @Override
     public String getNome() {
         return nome;
     }
@@ -114,5 +113,13 @@ public class Cachorro extends Animal {
 
     public void setTipo(TipoAnimal tipo) {
         this.tipo = tipo;
+    }
+
+    public StatusAdocao getStatusAdocao() {
+        return statusAdocao;
+    }
+
+    public void setStatusAdocao(StatusAdocao statusAdocao) {
+        this.statusAdocao = statusAdocao;
     }
 }
